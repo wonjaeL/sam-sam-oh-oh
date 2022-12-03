@@ -27,24 +27,6 @@ const Login = ({navigation}) => {
       password: password,
     });
 
-    console.log(body);
-
-    var request = new XMLHttpRequest();
-    request.onreadystatechange = e => {
-      if (request.readyState !== 4) {
-        return;
-      }
-
-      if (request.status === 200) {
-        console.log('success', request.responseText);
-      } else {
-        console.warn('error');
-      }
-    };
-
-    request.open('POST', 'http://d98a-211-38-155-122.ngrok.io/login/');
-    request.send();
-
     fetch('http://d98a-211-38-155-122.ngrok.io/login/', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -53,14 +35,11 @@ const Login = ({navigation}) => {
       .then(response => response.json())
       .then(responseJson => {
         console.log(responseJson);
-        if (!response.ok) {
-          loginErrorMessage(responseJson.message);
-          return;
-        }
         navigation.navigate('Main');
       })
       .catch(error => {
         console.error(error);
+        loginErrorMessage('');
       });
   };
   const onPressSinup = () => {
