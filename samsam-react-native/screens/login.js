@@ -1,9 +1,7 @@
 import React from 'react';
 import {
   TouchableOpacity,
-  Button,
   Text,
-  SafeAreaView,
   StyleSheet,
   TextInput,
   View,
@@ -22,6 +20,7 @@ const Login = ({navigation}) => {
     ]);
   };
   const onPressLogin = () => {
+    //navigation.navigate('Main', {id: '방기승'});
     const body = JSON.stringify({
       id: id,
       password: password,
@@ -35,7 +34,7 @@ const Login = ({navigation}) => {
       .then(response => response.json())
       .then(responseJson => {
         console.log(responseJson);
-        navigation.navigate('Main');
+        navigation.navigate('Main', {id: '방기승'});
       })
       .catch(error => {
         console.error(error);
@@ -43,22 +42,22 @@ const Login = ({navigation}) => {
       });
   };
   const onPressSinup = () => {
-    fetch('http://d98a-211-38-155-122.ngrok.io/api/posts/', {
-      method: 'GET',
-    })
-      .then(response => response.json())
-      .then(responseJson => {
-        console.log(responseJson);
-        this.changeText(responseJson[0].title);
-      })
-      .catch(error => {
-        // 실패 틀릴때 / 통신오류
-        this.loginErrorMessange();
-        console.error(error);
-      });
+    // fetch('http://d98a-211-38-155-122.ngrok.io/api/posts/', {
+    //   method: 'GET',
+    // })
+    //   .then(response => response.json())
+    //   .then(responseJson => {
+    //     console.log(responseJson);
+    //     this.changeText(responseJson[0].title);
+    //   })
+    //   .catch(error => {
+    //     // 실패 틀릴때 / 통신오류
+    //     this.loginErrorMessange();
+    //     console.error(error);
+    //   });
   };
   return (
-    <SafeAreaView>
+    <View>
       <Text style={styles.title}>삼 삼 오 오</Text>
       <Text style={styles.label}>아이디</Text>
       <TextInput style={styles.input} onChangeText={onChangeId} value={id} />
@@ -99,7 +98,7 @@ const Login = ({navigation}) => {
           </Text>
         </Text>
       </TouchableOpacity>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -128,18 +127,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginTop: 171,
     marginBottom: 91,
-    //fontFamily: 'Montserrat',
   },
-  // container: {
-  //   flex: 3,
-  // },
-  // header: {
-  //   flex: 1,
-  // },
-  // textInputlayout: {
-  //   flex: 1,
-  //   alignContent: 'center',
-  // },
   button: {
     marginRight: 40,
     marginLeft: 40,
