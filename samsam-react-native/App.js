@@ -23,7 +23,13 @@ const App = () => {
               title: '로그인',
             }}
           />
-          <Stack.Screen name="Main" component={Main} />
+          <Stack.Screen
+            name="Main"
+            component={Main}
+            options={{
+              title: '트레이너 메뉴',
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
       <Toast />

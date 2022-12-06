@@ -6,11 +6,15 @@ import {
   TextInput,
   View,
   Alert,
+  Switch,
 } from 'react-native';
 import Toast from 'react-native-toast-message';
+
 const Login = ({navigation}) => {
   const [id, onChangeId] = React.useState();
   const [password, onChangePassword] = React.useState();
+  const [isEnabled, setIsEnabled] = React.useState(true);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const succesToast = ({id}) => {
     Toast.show({
       type: 'success',
@@ -19,10 +23,12 @@ const Login = ({navigation}) => {
       position: 'bottom',
     });
   };
-  const errorToast = () => {
+  const errorToast = error => {
+    console.log(error);
     Toast.show({
       type: 'error',
       text1: '로그인 실패',
+      text2: '' + error,
       position: 'bottom',
       //text2: '반갑습니다. ' + id + '님.',
     });
@@ -43,7 +49,7 @@ const Login = ({navigation}) => {
       password: password,
     });
     // navigation.navigate('Main', {id: id});
-
+    let login_status = true;
     fetch(
       'http://ec2-13-124-162-219.ap-northeast-2.compute.amazonaws.com:10000/login/',
       {
@@ -53,31 +59,30 @@ const Login = ({navigation}) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          id: 'test',
-          password: 'test',
+          id: id,
+          password: password,
         }),
       },
     )
-      // .then(response => {
-      //   console.log(response);
-      //   //console.log(response.body);
-      //   //console.log(response.text());
-      //   //console.log(response.json());
-      //   // if (!response.ok) {
-      //   //   loginErrorMessage(response.json().massage);
-      //   // }
-      //   //return response.json();
-      //   return response.text();
-      // })
-      .then(response => response.text())
+      .then(response => {
+        console.log(response);
+        login_status = response.ok;
+        return response.json();
+        //return response.text();
+      })
+      //.then(response => response.text())
       .then(responseJson => {
-        console.log(responseJson);
-        navigation.navigate('Main', {id: '방기승'});
+        if (!login_status) {
+          errorToast(responseJson.message);
+          return;
+        }
+        //console.log(responseJson);
+        navigation.navigate('Main', {id: id});
         succesToast({id});
       })
       .catch(error => {
-        console.error(error);
-        loginErrorMessage('');
+        //console.error(error);
+        //loginErrorMessage('');
       });
   };
   const onPressSinup = () => {
@@ -102,6 +107,17 @@ const Login = ({navigation}) => {
         <Text style={styles.title}>삼 삼 오 오</Text>
       </View>
       <View style={styles.text_input_view}>
+        {/* 회원용 토글 스위치 
+        <View style={styles.switch_view}>
+          <Switch
+            trackColor={{false: '#767577', true: '#81b0ff'}}
+            thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={toggleSwitch}
+            value={isEnabled}
+          />
+          <Text style={styles.switch_label}>회원용</Text>
+        </View> */}
         <Text style={styles.label}>아이디</Text>
         <TextInput style={styles.input} onChangeText={onChangeId} value={id} />
         <Text style={styles.label}>비밀번호</Text>
@@ -161,7 +177,17 @@ const styles = StyleSheet.create({
   },
   button_view: {
     flex: 3,
+
     //justifyContent: 'center',
+  },
+  switch_view: {
+    marginLeft: 40,
+    flexDirection: 'row-reverse',
+    alignItems: 'flex-end',
+  },
+  switch_label: {
+    fontSize: 10,
+    //textAlign: 'auto',
   },
   input: {
     autoCapitalize: 'none',
