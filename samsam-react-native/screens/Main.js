@@ -1,5 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, Image, Text, StyleSheet, View} from 'react-native';
+
 const Main = ({navigation, route}) => {
   const onPressMenu = () => {};
   return (
