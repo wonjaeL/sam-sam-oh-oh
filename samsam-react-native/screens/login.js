@@ -7,6 +7,22 @@ import {
   View,
   Alert,
 } from 'react-native';
+
+import {
+  KakaoOAuthToken,
+  loginWithKakaoAccount,
+} from '@react-native-seoul/kakao-login';
+
+const signInWithKakao = async () => {
+  const result = await loginWithKakaoAccount();
+  console.log(result);
+};
+// https://github.com/crossplatformkorea/react-native-kakao-login#readme 참고
+import {fetchPost} from '../Server/login.js';
+import {ReactQueryDevtools} from 'react-query/devtools';
+import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
+const queryClient = new QueryClient();
+
 const Login = ({navigation}) => {
   const [id, onChangeId] = React.useState();
   const [password, onChangePassword] = React.useState();
@@ -19,27 +35,46 @@ const Login = ({navigation}) => {
       },
     ]);
   };
+
   const onPressLogin = () => {
-    //navigation.navigate('Main', {id: '방기승'});
+    // navigation.navigate('Main', {id: '방기승'});
+    // const {isLoading, data, isRefetching} = useQuery(
+    //   ['todos', 'goMountain'],
+    //   fetchPost,
+    // );
+    const {isLoading, isError, error, data} = useQuery(
+      'login',
+      fetch('http://d98a-211-38-155-122.ngrok.io/login/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: body,
+      }).then(response => response.json()),
+    );
+    if (!data) {
+      // 데이터가 없는 경우
+    }
+    if (isLoading) {
+      // 로딩중인 경우
+    }
+    if (isError) {
+      console.error(error);
+      loginErrorMessage(error);
+    }
+    console.log(data);
+    navigation.navigate('Main', {id: '방기승'});
     const body = JSON.stringify({
       id: id,
       password: password,
     });
 
-    fetch('http://d98a-211-38-155-122.ngrok.io/login/', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: body,
-    })
-      .then(response => response.json())
-      .then(responseJson => {
-        console.log(responseJson);
-        navigation.navigate('Main', {id: '방기승'});
-      })
-      .catch(error => {
-        console.error(error);
-        loginErrorMessage('');
-      });
+    //   .then(responseJson => {
+    //     console.log(responseJson);
+    //     navigation.navigate('Main', {id: '방기승'});
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //     loginErrorMessage('');
+    //   });
   };
   const onPressSinup = () => {
     // fetch('http://d98a-211-38-155-122.ngrok.io/api/posts/', {
@@ -77,7 +112,7 @@ const Login = ({navigation}) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.kakaoButton, styles.button]}
-        onPress={onPressLogin}
+        onPress={signInWithKakao}
         underlayColor="#fff">
         <Text style={styles.kakaoText}>Login with Kakao</Text>
       </TouchableOpacity>
