@@ -10,6 +10,22 @@ import {
 } from 'react-native';
 import Toast from 'react-native-toast-message';
 
+
+import {
+  KakaoOAuthToken,
+  loginWithKakaoAccount,
+} from '@react-native-seoul/kakao-login';
+
+const signInWithKakao = async () => {
+  const result = await loginWithKakaoAccount();
+  console.log(result);
+};
+// https://github.com/crossplatformkorea/react-native-kakao-login#readme 참고
+import {fetchPost} from '../Server/login.js';
+import {ReactQueryDevtools} from 'react-query/devtools';
+import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
+const queryClient = new QueryClient();
+
 const Login = ({navigation}) => {
   const [id, onChangeId] = React.useState();
   const [password, onChangePassword] = React.useState();
@@ -42,47 +58,51 @@ const Login = ({navigation}) => {
       },
     ]);
   };
+
   const onPressLogin = () => {
-    //navigation.navigate('Main', {id: '방기승'});
+    // navigation.navigate('Main', {id: '방기승'});
+    // const {isLoading, data, isRefetching} = useQuery(
+    //   ['todos', 'goMountain'],
+    //   fetchPost,
+    // );
+    const {isLoading, isError, error, data} = useQuery(
+      'login',
+      fetch('http://d98a-211-38-155-122.ngrok.io/login/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: body,
+      }).then(response => response.json()),
+    );
+    if (!data) {
+      // 데이터가 없는 경우
+    }
+    if (isLoading) {
+      // 로딩중인 경우
+    }
+    if (isError) {
+      console.error(error);
+      loginErrorMessage(error);
+    }
+    console.log(data);
+    navigation.navigate('Main', {id: '방기승'});
     const body = JSON.stringify({
       id: id,
       password: password,
     });
-    // navigation.navigate('Main', {id: id});
-    let login_status = true;
-    fetch(
-      'http://ec2-13-124-162-219.ap-northeast-2.compute.amazonaws.com:10000/login/',
-      {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          id: id,
-          password: password,
-        }),
-      },
-    )
-      .then(response => {
-        console.log(response);
-        login_status = response.ok;
-        return response.json();
-        //return response.text();
-      })
-      //.then(response => response.text())
+
+    fetch('http://d98a-211-38-155-122.ngrok.io/login/', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: body,
+    })
+      .then(response => response.json())
       .then(responseJson => {
-        if (!login_status) {
-          errorToast(responseJson.message);
-          return;
-        }
-        //console.log(responseJson);
-        navigation.navigate('Main', {id: id});
-        succesToast({id});
+        console.log(responseJson);
+        navigation.navigate('Main', {id: '방기승'});
       })
       .catch(error => {
-        //console.error(error);
-        //loginErrorMessage('');
+        console.error(error);
+        loginErrorMessage('');
       });
   };
   const onPressSinup = () => {
@@ -102,63 +122,47 @@ const Login = ({navigation}) => {
     //   });
   };
   return (
-    <View style={styles.main_view}>
-      <View style={styles.title_view}>
-        <Text style={styles.title}>삼 삼 오 오</Text>
-      </View>
-      <View style={styles.text_input_view}>
-        {/* 회원용 토글 스위치 
-        <View style={styles.switch_view}>
-          <Switch
-            trackColor={{false: '#767577', true: '#81b0ff'}}
-            thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleSwitch}
-            value={isEnabled}
-          />
-          <Text style={styles.switch_label}>회원용</Text>
-        </View> */}
-        <Text style={styles.label}>아이디</Text>
-        <TextInput style={styles.input} onChangeText={onChangeId} value={id} />
-        <Text style={styles.label}>비밀번호</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangePassword}
-          secureTextEntry={true}
-          value={password}
-        />
-      </View>
-      <View style={styles.button_view}>
-        <TouchableOpacity
-          style={[styles.loginButton, styles.button]}
-          onPress={onPressLogin}
-          underlayColor="#fff">
-          <Text style={styles.loginText}>로그인</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.kakaoButton, styles.button]}
-          onPress={onPressLogin}
-          underlayColor="#fff">
-          <Text style={styles.kakaoText}>Login with Kakao</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.facebookButton, styles.button]}
-          onPress={onPressLogin}
-          underlayColor="#fff">
-          <Text style={styles.loginText}>Login with Facebook</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={onPressSinup}
-          underlayColor="#fff"
-          style={styles.signup}>
-          <Text>
-            <Text style={styles.kakaoText}>계정이 없으신가요?</Text>
-            <Text style={[styles.kakaoText, styles.signupText]} color="#5F5AF7">
-              회원가입
-            </Text>
+    <View>
+      <Text style={styles.title}>삼 삼 오 오</Text>
+      <Text style={styles.label}>아이디</Text>
+      <TextInput style={styles.input} onChangeText={onChangeId} value={id} />
+      <Text style={styles.label}>비밀번호</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangePassword}
+        secureTextEntry={true}
+        value={password}
+      />
+
+      <TouchableOpacity
+        style={[styles.loginButton, styles.button]}
+        onPress={onPressLogin}
+        underlayColor="#fff">
+        <Text style={styles.loginText}>로그인</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.kakaoButton, styles.button]}
+        onPress={onPressLogin}
+        underlayColor="#fff">
+        <Text style={styles.kakaoText}>Login with Kakao</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.facebookButton, styles.button]}
+        onPress={onPressLogin}
+        underlayColor="#fff">
+        <Text style={styles.loginText}>Login with Facebook</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={onPressSinup}
+        underlayColor="#fff"
+        style={styles.signup}>
+        <Text>
+          <Text style={styles.kakaoText}>계정이 없으신가요?</Text>
+          <Text style={[styles.kakaoText, styles.signupText]} color="#5F5AF7">
+            회원가입
           </Text>
-        </TouchableOpacity>
-      </View>
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };

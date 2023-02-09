@@ -13,6 +13,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		13C9599AA703000CCA76A373 /* libPods-sam_sam_oh_oh-sam_sam_oh_ohTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61613E1932288DAB6DB628AB /* libPods-sam_sam_oh_oh-sam_sam_oh_ohTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+<<<<<<< HEAD
 		E85A61DB293F867E0014437F /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E85A61CA293F867D0014437F /* Foundation.ttf */; };
 		E85A61DD293F867E0014437F /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E85A61CB293F867D0014437F /* Octicons.ttf */; };
 		E85A61DF293F867E0014437F /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E85A61CC293F867D0014437F /* Fontisto.ttf */; };
@@ -30,6 +31,9 @@
 		E85A61F7293F867E0014437F /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E85A61D8293F867E0014437F /* MaterialCommunityIcons.ttf */; };
 		E85A61F9293F867E0014437F /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E85A61D9293F867E0014437F /* MaterialIcons.ttf */; };
 		F85769CEBD6B09A9BFDCC86E /* libPods-sam_sam_oh_oh.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 435677541D62B50D7F6E7DE1 /* libPods-sam_sam_oh_oh.a */; };
+=======
+		E82CAED229953C6500AB28BC /*  SwiftBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82CAED129953C6500AB28BC /*  SwiftBridge.swift */; };
+>>>>>>> master
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +61,7 @@
 		4F58AE4856D81E7787AE700D /* Pods-sam_sam_oh_oh.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sam_sam_oh_oh.release.xcconfig"; path = "Target Support Files/Pods-sam_sam_oh_oh/Pods-sam_sam_oh_oh.release.xcconfig"; sourceTree = "<group>"; };
 		61613E1932288DAB6DB628AB /* libPods-sam_sam_oh_oh-sam_sam_oh_ohTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-sam_sam_oh_oh-sam_sam_oh_ohTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = sam_sam_oh_oh/LaunchScreen.storyboard; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		ACF5E2A024EFE42F04D0F1D9 /* Pods-sam_sam_oh_oh-sam_sam_oh_ohTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sam_sam_oh_oh-sam_sam_oh_ohTests.debug.xcconfig"; path = "Target Support Files/Pods-sam_sam_oh_oh-sam_sam_oh_ohTests/Pods-sam_sam_oh_oh-sam_sam_oh_ohTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B943593A9715AF430EFFA19B /* Pods-sam_sam_oh_oh-sam_sam_oh_ohTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sam_sam_oh_oh-sam_sam_oh_ohTests.release.xcconfig"; path = "Target Support Files/Pods-sam_sam_oh_oh-sam_sam_oh_ohTests/Pods-sam_sam_oh_oh-sam_sam_oh_ohTests.release.xcconfig"; sourceTree = "<group>"; };
 		E85A61CA293F867D0014437F /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
@@ -75,6 +80,11 @@
 		E85A61D7293F867E0014437F /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		E85A61D8293F867E0014437F /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		E85A61D9293F867E0014437F /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+=======
+		89C6BE57DB24E9ADA2F236DE /* Pods-sam_sam_oh_oh-sam_sam_oh_ohTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sam_sam_oh_oh-sam_sam_oh_ohTests.release.xcconfig"; path = "Target Support Files/Pods-sam_sam_oh_oh-sam_sam_oh_ohTests/Pods-sam_sam_oh_oh-sam_sam_oh_ohTests.release.xcconfig"; sourceTree = "<group>"; };
+		E82CAED029953C6500AB28BC /* sam_sam_oh_oh-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sam_sam_oh_oh-Bridging-Header.h"; sourceTree = "<group>"; };
+		E82CAED129953C6500AB28BC /*  SwiftBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " SwiftBridge.swift"; sourceTree = "<group>"; };
+>>>>>>> master
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -125,6 +135,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				E82CAED129953C6500AB28BC /*  SwiftBridge.swift */,
+				E82CAED029953C6500AB28BC /* sam_sam_oh_oh-Bridging-Header.h */,
 			);
 			name = sam_sam_oh_oh;
 			sourceTree = "<group>";
@@ -263,7 +275,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1410;
 					};
 				};
 			};
@@ -486,6 +498,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				E82CAED229953C6500AB28BC /*  SwiftBridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,13 +517,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ACF5E2A024EFE42F04D0F1D9 /* Pods-sam_sam_oh_oh-sam_sam_oh_ohTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = sam_sam_oh_ohTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -531,10 +545,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B943593A9715AF430EFFA19B /* Pods-sam_sam_oh_oh-sam_sam_oh_ohTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = sam_sam_oh_ohTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -558,6 +573,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AZ3H5KHX72;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = sam_sam_oh_oh/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -569,8 +585,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.samsamohoh;
 				PRODUCT_NAME = sam_sam_oh_oh;
+				SWIFT_OBJC_BRIDGING_HEADER = "sam_sam_oh_oh-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -584,6 +601,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AZ3H5KHX72;
 				INFOPLIST_FILE = sam_sam_oh_oh/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -594,8 +612,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.samsamohoh;
 				PRODUCT_NAME = sam_sam_oh_oh;
+				SWIFT_OBJC_BRIDGING_HEADER = "sam_sam_oh_oh-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
