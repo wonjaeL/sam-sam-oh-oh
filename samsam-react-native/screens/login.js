@@ -5,92 +5,100 @@ import {
   StyleSheet,
   TextInput,
   View,
-  Alert,
 } from 'react-native';
 
-import {
-  KakaoOAuthToken,
-  loginWithKakaoAccount,
-} from '@react-native-seoul/kakao-login';
+import {loginWithKakaoAccount} from '@react-native-seoul/kakao-login';
 
-const signInWithKakao = async () => {
-  const result = await loginWithKakaoAccount();
-  console.log(result);
+import axios from 'axios';
+import {useMutation} from 'react-query';
+import Toast from 'react-native-toast-message';
+
+const kakaoLogin = async ({accessToken}) => {
+  const response = await axios.post('http://127.0.0.1:8000/kakaologin/', {
+    code: accessToken,
+  });
+  return response.data;
 };
-// https://github.com/crossplatformkorea/react-native-kakao-login#readme 참고
-import {fetchPost} from '../Server/login.js';
-import {ReactQueryDevtools} from 'react-query/devtools';
-import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
-const queryClient = new QueryClient();
+
+const login_fnc = async ({id, password}) => {
+  const body = JSON.stringify({
+    id: id,
+    password: password,
+  });
+  const response = await axios.post('http://127.0.0.1:8000/login/', body, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  return response.data;
+};
 
 const Login = ({navigation}) => {
   const [id, onChangeId] = React.useState();
   const [password, onChangePassword] = React.useState();
-  //const [text, onChangeText] = React.useState();
-  const loginErrorMessage = error => {
-    Alert.alert('로그인 실패', error, [
-      {
-        text: '확인',
-        style: 'cancel',
-      },
-    ]);
-  };
-
-  const onPressLogin = () => {
-    // navigation.navigate('Main', {id: '방기승'});
-    // const {isLoading, data, isRefetching} = useQuery(
-    //   ['todos', 'goMountain'],
-    //   fetchPost,
-    // );
-    const {isLoading, isError, error, data} = useQuery(
-      'login',
-      fetch('http://d98a-211-38-155-122.ngrok.io/login/', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: body,
-      }).then(response => response.json()),
-    );
-    if (!data) {
-      // 데이터가 없는 경우
-    }
-    if (isLoading) {
-      // 로딩중인 경우
-    }
-    if (isError) {
+  const signInWithKakaoMutation = useMutation(kakaoLogin, {
+    onSuccess: data => {
+      // 로그인 성공
+      succesToast({id});
+      console.log(data);
+      navigation.navigate('Main', {id: id});
+    },
+    onError: error => {
+      // 에러 발생
+      errorToast(error.response.data.message);
+      // loginErrorMessage(error.response.data.message);
+    },
+  });
+  const loginMutationResult = useMutation(login_fnc, {
+    onSuccess: data => {
+      // 로그인 성공
+      succesToast({id});
+      navigation.navigate('Main', {id: id});
+    },
+    onError: error => {
+      // 에러 발생
+      errorToast(error.response.data.message);
+      // loginErrorMessage(error.response.data.message);
+    },
+  });
+  const handleSignInWithKakao = async () => {
+    const result = await loginWithKakaoAccount();
+    try {
+      await signInWithKakaoMutation.mutate({accessToken: result.accessToken});
+      // 로그인 성공 시 화면 전환
+    } catch (error) {
       console.error(error);
-      loginErrorMessage(error);
+      // 로그인 실패 시 에러 처리
     }
-    console.log(data);
-    navigation.navigate('Main', {id: '방기승'});
-    const body = JSON.stringify({
-      id: id,
-      password: password,
+  };
+  const handleLogin = async () => {
+    try {
+      await loginMutationResult.mutate({id, password});
+      // 로그인 성공
+    } catch (error) {
+      // 로그인 실패
+      // console.error(error);
+    }
+  };
+  const succesToast = ({id}) => {
+    Toast.show({
+      type: 'success',
+      text1: '로그인 성공',
+      text2: '반갑습니다. ' + id + '님.',
+      position: 'top',
     });
+  };
+  const errorToast = error => {
+    console.log(error);
+    Toast.show({
+      type: 'error',
+      text1: '로그인 실패',
+      text2: '' + error,
+      position: 'top',
+    });
+  };
 
-    //   .then(responseJson => {
-    //     console.log(responseJson);
-    //     navigation.navigate('Main', {id: '방기승'});
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //     loginErrorMessage('');
-    //   });
-  };
-  const onPressSinup = () => {
-    // fetch('http://d98a-211-38-155-122.ngrok.io/api/posts/', {
-    //   method: 'GET',
-    // })
-    //   .then(response => response.json())
-    //   .then(responseJson => {
-    //     console.log(responseJson);
-    //     this.changeText(responseJson[0].title);
-    //   })
-    //   .catch(error => {
-    //     // 실패 틀릴때 / 통신오류
-    //     this.loginErrorMessange();
-    //     console.error(error);
-    //   });
-  };
   return (
     <View>
       <Text style={styles.title}>삼 삼 오 오</Text>
@@ -106,24 +114,30 @@ const Login = ({navigation}) => {
 
       <TouchableOpacity
         style={[styles.loginButton, styles.button]}
-        onPress={onPressLogin}
+        onPress={handleLogin}
         underlayColor="#fff">
         <Text style={styles.loginText}>로그인</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.kakaoButton, styles.button]}
-        onPress={signInWithKakao}
+        onPress={handleSignInWithKakao}
         underlayColor="#fff">
         <Text style={styles.kakaoText}>Login with Kakao</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.facebookButton, styles.button]}
-        onPress={onPressLogin}
+        onPress={handleLogin}
         underlayColor="#fff">
         <Text style={styles.loginText}>Login with Facebook</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={onPressSinup}
+        style={[styles.facebookButton, styles.button]}
+        onPress={handleLogin}
+        underlayColor="#fff">
+        <Text style={styles.loginText}>Login with Google</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={handleLogin}
         underlayColor="#fff"
         style={styles.signup}>
         <Text>
