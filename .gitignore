@@ -268,3 +268,6 @@ dmypy.json
 .idea/
 /media
 /tmp
+
+#  해당 파일을 binary처럼 인식하도록 설정하는 건데 이렇게 되면 project.pbxproj에 변경사항이 생겨도 팀원들과 conflict가 발생하지 않고 작업을 할 수 있다고 합니다.
+*.pbxproj binary merge=union

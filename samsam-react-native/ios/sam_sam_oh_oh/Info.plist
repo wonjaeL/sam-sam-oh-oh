@@ -30,6 +30,14 @@
 				<string>kakaof974447529fa42a779d6089f6c4da885</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.1085653980443-j1mjrhq36hfv6b8cibsjrindvs9perk9</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
@@ -37,9 +45,9 @@
 	<string>f974447529fa42a779d6089f6c4da885</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-   		<string>kakaokompassauth</string>
-   		<string>storykompassauth</string>
-   		<string>kakaolink</string>
+		<string>kakaokompassauth</string>
+		<string>storykompassauth</string>
+		<string>kakaolink</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
